@@ -11,8 +11,8 @@ st.set_page_config(
 
 @st.cache_data
 def load_data():
-    # ✅ Use relative path so Streamlit Cloud can access the file in your repo
-    df = pd.read_csv("clean_dataset.csv")
+    # ✅ Use relative path that matches your repo structure
+    df = pd.read_csv("Submission_05/clean_dataset.csv")
     df['payment_date'] = pd.to_datetime(df['payment_date'])
     return df
 
