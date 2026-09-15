@@ -11,7 +11,8 @@ st.set_page_config(
 
 @st.cache_data
 def load_data():
-    df = pd.read_csv(r"E:\CODING\Py\submission_02_reb_tech_academy\clean_dataset.csv")
+    # ✅ Use relative path so Streamlit Cloud can access the file in your repo
+    df = pd.read_csv("clean_dataset.csv")
     df['payment_date'] = pd.to_datetime(df['payment_date'])
     return df
 
@@ -114,4 +115,13 @@ st.dataframe(
                  'payment_status', 'amount_paid', 'net_settlement_amount',
                  'profitability_status']].head(100),
     use_container_width=True
+)
+
+# ✅ Optional: Add a download button for filtered data
+csv = filtered_df.to_csv(index=False).encode('utf-8')
+st.download_button(
+    label="⬇️ Download Filtered Data as CSV",
+    data=csv,
+    file_name="filtered_transactions.csv",
+    mime="text/csv"
 )
